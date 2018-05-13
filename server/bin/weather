@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd "$(dirname "$0")"
+
+python2.7 weather.py
+convert output/weather.svg output/weather.png
+pngcrush -c 0 -nofilecheck output/weather.png output/weather-minified.png
+sudo cp -f output/weather-minified.png /var/www/html/weather.png

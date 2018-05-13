@@ -1,0 +1,10 @@
+#!/bin/sh
+echo "Running Add Weather cron Job" >>./weatherlog.txt
+
+# Make sure we don't add multiple cron jobs
+. "./cron-remove"
+
+echo "*/5 * * * * /home/pi/kindle-weather-master/server/weather" >>/var/spool/cron/crontabs/pi
+echo "New /var/spool/cron/crontabs/pi:" >>./weatherlog.txt
+cat /var/spool/cron/crontabs/pi >> ./weatherlog.txt
+/etc/init.d/cron restart >> ./weatherlog.txt 2>&1

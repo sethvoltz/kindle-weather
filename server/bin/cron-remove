@@ -1,0 +1,9 @@
+#!/bin/sh
+echo "Running Remove Weather cron Job" >>./weatherlog.txt
+
+sudo grep -iv weather /var/spool/cron/crontabs/pi >noweather
+sudo mv noweather /var/spool/cron/crontabs/pi
+
+echo "New /var/spool/cron/crontabs/pi:" >>./weatherlog.txt
+cat /var/spool/cron/crontabs/pi >>./weatherlog.txt
+sudo /etc/init.d/cron restart >>./weatherlog.txt 2>&1
